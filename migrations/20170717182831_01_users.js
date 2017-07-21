@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
     table.string('username');
     table.string('email');
     table.string('phone');
+    table.string('password')
   });
 };
 

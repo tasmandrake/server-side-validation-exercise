@@ -9,7 +9,8 @@ exports.seed = function(knex, Promise) {
           lastname: 'Ross',
           username: 'paint4life',
           email: 'bob@ross.com',
-          phone: '3033333333'
+          phone: '3033333333',
+          password: 'paintingiscool'
         },
         {
           id: 2,
@@ -17,7 +18,8 @@ exports.seed = function(knex, Promise) {
           lastname: 'Davinci',
           username: 'prettyp@ints',
           email: 'leo@davinci.com',
-          phone: '7207777777'
+          phone: '7207777777',
+          password: 'password'
         }
       ]);
     })
