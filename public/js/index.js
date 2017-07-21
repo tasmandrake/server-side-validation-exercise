@@ -5,15 +5,16 @@ $(document).ready(function(){
 $('#submit').click(function (event){
  event.preventDefault();
 
-  let users = {
+  const users = {
    firstName: $('#firstNameInput').val(),
    lastName: $('#lastNameInput').val(),
    username: $('#usernameInput').val(),
    email: $('#emailInput').val(),
-   phone: $('#phoneInput').val()
+   phone: $('#phoneInput').val(),
+   password: $('#password').val()
   };
 
-  var options = {
+  const options = {
     contentType: 'application/json',
     type: 'POST',
     url: '/users',
@@ -21,7 +22,8 @@ $('#submit').click(function (event){
   };
 
   $.ajax(options)
-    .done(() => {
+    .done((res) => {
+      console.log(res);
       window.location.href = '/';
     })
     .fail((err) => {
