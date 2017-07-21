@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 router.get('/' , (req, res, next) => {
@@ -22,7 +24,11 @@ router.post('/' , (req, res, next) => {
   const username = req.body.users.username;
   const email = req.body.users.email;
   const phone = req.body.users.phone;
-  const password = req.body.password;
+  let password = req.body.password;
+
+  bcrypt.hash(password, saltRounds, function(err, hash) {
+    password = hash;
+  });
 
   if (!firstname) {
     return res.send('Firstname is required')
