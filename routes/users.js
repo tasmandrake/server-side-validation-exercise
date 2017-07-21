@@ -3,7 +3,15 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
-
+const Joi = require('joi');
+const schema = Joi.object().keys({
+  firstname: Joi.required(),
+  lastname: Joi.required(),
+  username: Joi.string().length(6).alphanum(),
+  email: Joi.string().email(),
+  phone: Joi.number(),
+  // password:
+})
 
 router.get('/' , (req, res, next) => {
   knex('users')
@@ -22,21 +30,14 @@ router.post('/' , (req, res, next) => {
   const username = req.body.users.username;
   const email = req.body.users.email;
   const phone = req.body.users.phone;
+  const Joi = require('joi');
 
-  if (!firstname) {
-    return res.send('Firstname is required')
-  } else if (!lastname) {
-    return res.send('Lastname is required')
-  } else if (!username && username.length < 6 && username.includes(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g) && Number(username[0])) {
-    return res.send('Username is required and must be longer than 6 characters and must start with a letter')
-  } else if (!email && email.includes('@')) {
-    return res.send('A valid email is required')
-  } else if (!phone && String(phone).length < 10 && String(phone).length > 10) {
-    return res.send('A valid 110 digit phone number is required')
-  }
-  // else if (!password) {
-  //   return res.send('Firstname is required')
-  // }
+  Joi.validate({ firstname, lastname, username, email, phone }, schema, (err, val) => {
+    if (err) {
+      return res.send(err);
+    }
+    return console.log(val);
+  })
   knex('users')
     .insert({
       firstname,
