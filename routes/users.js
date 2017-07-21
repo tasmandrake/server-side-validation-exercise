@@ -38,7 +38,7 @@ router.post('/' , (req, res, next) => {
     return res.send('Username is required and must be longer than 6 characters and must start with a letter and contain no punctuation')
   } else if (!email || !email.includes('@')) {
     return res.send('A valid email is required')
-  } else if (!phone || String(phone).length < 10 || String(phone).length > 10) {
+  } else if (!phone || String(phone).length < 10 || String(phone).length > 10 || typeof phone !== 'number') {
     return res.send('A valid 110 digit phone number is required')
   } else if (!password || password.length < 8 || !password.match(/[!?\/.,')]/) || !password.match(/[0-9]/)) {
     return res.send('Password is required and must be more than 8 characters, include a number and a special character')
